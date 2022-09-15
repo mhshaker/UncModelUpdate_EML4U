@@ -19,7 +19,9 @@ from sklearn.metrics import matthews_corrcoef
 # Parameters
 episodes_p =  0.05
 seed = 1
-# load data
+runs = 5
+
+########################################################### load data
 
 # features_all, targets_all   = dp.load_data("./Data/")
 # data = np.concatenate((features_all,targets_all), axis=1)
@@ -40,8 +42,8 @@ stream_score_all_list = []
 
 mode = "run all"
 
-for seed in range(5):
-    print("------------------------------------ seed ", seed)
+for seed in range(runs):
+    print("------------------------------------ run ", seed)
     # defining the model
     if mode == "unc" or mode == "run all":
         stream.restart()
@@ -55,7 +57,6 @@ for seed in range(5):
         tu_set = tu.mean()
         # Uncertainty detection
         # episode loop
-        update_model = True
         updatecounter = 0
         episode = 0
         stream_score_unc = []
@@ -73,18 +74,15 @@ for seed in range(5):
             tu, eu, au = unc.model_uncertainty(model, x_ep, x_train, y_train, laplace_smoothing=1)
             tu_ep = tu.mean()
             if tu_ep > tu_set:
-                update_model = True
+                x_train, y_train = x_ep, y_ep
+                model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+                model.fit(x_ep, y_ep) # remove keys when fiting the model
+                updatecounter +=1
             #     print("episode ", episode, "D")
             # else:
             #     print("episode ", episode)
 
             # train the model / update
-            if update_model:
-                x_train, y_train = x_ep, y_ep
-                model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
-                model.fit(x_ep, y_ep) # remove keys when fiting the model
-                update_model = False
-                updatecounter +=1
         stream_score_unc_list.append(stream_score_unc)
         print("unc update count", updatecounter)
 
