@@ -24,6 +24,7 @@ runs = 10
 data_name = "sim"
 n_samples = 50000
 n_classes = 5
+
 ########################################################### load data
 
 if data_name == "amazon":
@@ -81,7 +82,7 @@ for seed in range(runs):
     # defining the model
     if mode == "unc" or mode == "run all":
         stream.restart()
-        model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+        model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
         x_train, y_train = stream.next_sample(episode_size)
         model.fit(x_train, y_train)
         # set uncertainty score
@@ -110,7 +111,7 @@ for seed in range(runs):
             tu_ep = tu.mean()
             if tu_ep > tu_set:
                 x_train, y_train = x_ep, y_ep
-                model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+                model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
                 model.fit(x_ep, y_ep) # remove keys when fiting the model
                 updatecounter_unc +=1
             #     print("episode ", episode, "D")
@@ -135,7 +136,7 @@ for seed in range(runs):
 
         # Error detection
         stream.restart()
-        model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+        model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
         x_train, y_train = stream.next_sample(episode_size)
         model.fit(x_train, y_train)
 
@@ -162,7 +163,7 @@ for seed in range(runs):
             # train the model / update
             if m[2] < score_set: # score_set is MCC - higher is better
                 x_train, y_train = x_ep, y_ep
-                model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+                model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
                 model.fit(x_ep, y_ep) # remove keys when fiting the model
                 update_model = False
                 updatecounter_score +=1
@@ -182,7 +183,7 @@ for seed in range(runs):
     if mode == "all" or mode == "run all":
         # always update
         stream.restart()
-        model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+        model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
         x_train, y_train = stream.next_sample(episode_size)
         model.fit(x_train, y_train)
 
@@ -206,7 +207,7 @@ for seed in range(runs):
 
             # train the model / update
             x_train, y_train = x_ep, y_ep
-            model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+            model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
             model.fit(x_ep, y_ep) # remove keys when fiting the model
             updatecounter_all +=1
 
@@ -220,7 +221,7 @@ for seed in range(runs):
     if mode == "nou" or mode == "run all":
         # always update
         stream.restart()
-        model = RandomForestClassifier(max_depth=10, n_estimators=10, random_state=seed)
+        model = RandomForestClassifier(random_state=seed) # max_depth=10, n_estimators=10, 
         x_train, y_train = stream.next_sample(episode_size)
         model.fit(x_train, y_train)
 
