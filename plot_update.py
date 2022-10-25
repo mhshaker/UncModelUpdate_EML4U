@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-run_name = "sim data 50d 5c run10/"
+run_name = "amazon_small 25.10.22/"
+sim = False
 # run_name = ""
-run_name = "amazon data/"
+# run_name = "amazon data/"
 
 with open(f"results/{run_name}stream_score_unc_list.npy", 'rb') as f:
     unc = np.load(f)
@@ -47,14 +48,15 @@ plt.ylabel("Matthews correlation coefficient (MCC)")
 plt.savefig(f"results/{run_name}_MCC.png")
 plt.close()
 
-exit()
+# exit()
 
 plt.plot(nou[:,0], label="nou (0)", alpha=0.8) # , '--'
 plt.plot(err[:,0], label=f"error ({err_c})", alpha=0.8)
 plt.plot(unc[:,0], label=f"unc ({unc_c})", c="black", alpha=0.8)
 plt.plot(all[:,0], label=f"all ({len(all)})", alpha=0.8)
-plt.vlines(x=31, ymin=nou[:,0].min() - 0.1 * all[:,0].max(), ymax=all[:,0].max() + 0.1 * all[:,0].max(), color='gray', alpha=0.5)
-plt.vlines(x=64, ymin=nou[:,0].min() - 0.1 * all[:,0].max(), ymax=all[:,0].max() + 0.1 * all[:,0].max(), color='gray', alpha=0.5)
+if sim:
+    plt.vlines(x=31, ymin=nou[:,0].min() - 0.1 * all[:,0].max(), ymax=all[:,0].max() + 0.1 * all[:,0].max(), color='gray', alpha=0.5)
+    plt.vlines(x=64, ymin=nou[:,0].min() - 0.1 * all[:,0].max(), ymax=all[:,0].max() + 0.1 * all[:,0].max(), color='gray', alpha=0.5)
 
 plt.legend()
 plt.xlabel("Episodes")
@@ -66,8 +68,9 @@ plt.plot(nou[:,1], label="nou (0)", alpha=0.8)
 plt.plot(err[:,1], label=f"error ({err_c})", alpha=0.8)
 plt.plot(unc[:,1], label=f"unc ({unc_c})", c="black", alpha=0.8)
 plt.plot(all[:,1], label=f"all ({len(all)})", alpha=0.8)
-plt.vlines(x=31, ymin=nou[:,1].min() - 0.1 * all[:,1].max(), ymax=all[:,1].max() + 0.1 * all[:,1].max(), color='gray', alpha=0.5)
-plt.vlines(x=64, ymin=nou[:,1].min() - 0.1 * all[:,1].max(), ymax=all[:,1].max() + 0.1 * all[:,1].max(), color='gray', alpha=0.5)
+if sim:
+    plt.vlines(x=31, ymin=nou[:,1].min() - 0.1 * all[:,1].max(), ymax=all[:,1].max() + 0.1 * all[:,1].max(), color='gray', alpha=0.5)
+    plt.vlines(x=64, ymin=nou[:,1].min() - 0.1 * all[:,1].max(), ymax=all[:,1].max() + 0.1 * all[:,1].max(), color='gray', alpha=0.5)
 
 plt.legend()
 plt.xlabel("Episodes")
@@ -79,8 +82,9 @@ plt.plot(nou[:,2], label="nou (0)", alpha=0.8)
 plt.plot(err[:,2], label=f"error ({err_c})", alpha=0.8)
 plt.plot(unc[:,2], label=f"unc ({unc_c})", c="black", alpha=0.8)
 plt.plot(all[:,2], label=f"all ({len(all)})", alpha=0.8)
-plt.vlines(x=31, ymin=nou[:,2].min() - 0.1 * all[:,2].max(), ymax=all[:,2].max() + 0.1 * all[:,2].max(), color='gray', alpha=0.5)
-plt.vlines(x=64, ymin=nou[:,2].min() - 0.1 * all[:,2].max(), ymax=all[:,2].max() + 0.1 * all[:,2].max(), color='gray', alpha=0.5)
+if sim:
+    plt.vlines(x=31, ymin=nou[:,2].min() - 0.1 * all[:,2].max(), ymax=all[:,2].max() + 0.1 * all[:,2].max(), color='gray', alpha=0.5)
+    plt.vlines(x=64, ymin=nou[:,2].min() - 0.1 * all[:,2].max(), ymax=all[:,2].max() + 0.1 * all[:,2].max(), color='gray', alpha=0.5)
 
 plt.legend()
 plt.xlabel("Episodes")

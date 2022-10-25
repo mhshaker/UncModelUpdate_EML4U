@@ -19,9 +19,9 @@ from sklearn.datasets import make_classification
 import math
 
 # Parameters
-episodes_p =  0.01
+episodes_p =  0.05
 runs = 10
-data_name = "sim"
+data_name = "amazon"
 n_samples = 50000
 n_classes = 5
 
