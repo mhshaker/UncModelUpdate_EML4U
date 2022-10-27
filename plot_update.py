@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-run_name = "amazon_small 25.10.22/"
+run_name = "amazon large 27.10.22/"
 sim = False
 # run_name = ""
 # run_name = "amazon data/"

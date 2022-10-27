@@ -19,8 +19,8 @@ from sklearn.datasets import make_classification
 import math
 
 # Parameters
-episodes_p =  0.05
-runs = 10
+episodes_p =  0.01 / 778
+runs = 1
 data_name = "amazon"
 n_samples = 50000
 n_classes = 5
@@ -33,6 +33,8 @@ if data_name == "amazon":
 elif data_name == "amazon_small":
     with open('Data/amazon_small.npy', 'rb') as f:
         data = np.load(f)
+
+print("data ", data.shape)
 
 ########################################################### metrics
 
